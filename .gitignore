@@ -1,0 +1,12 @@
+# Compiled files
+*.exe
+
+# VS Code
+.vscode/
+REVISION/
+codechef/
+codeforces/
+
+# Build folders
+
+# Debug files
