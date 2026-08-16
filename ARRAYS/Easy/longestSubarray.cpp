@@ -17,7 +17,6 @@ int longestSubarray(vector<int> &nums, int k)
             if (sum == k)
             {
                 length = max(cnt, length);
-                break;
             }
         }
     }
@@ -26,24 +25,28 @@ int longestSubarray(vector<int> &nums, int k)
 
 int longestSubarray2(vector<int> &nums, int k)
 {
-    int length = 0;
-    int itrr = 0;
-    for (int i = 0; i < nums.size(); i++)
+    int n = nums.size();
+    int left = 0, right = 0;
+    int maxLen = 0;
+    long long sum = nums[0];
+    while (right < n)
     {
-        int cnt = 0;
-        int sum = 0;
-        for (int j = i; j < nums.size(); j++)
+        while (left <= right && sum > k)
         {
-            sum += nums[j];
-            cnt++;
-            if (sum == k)
-            {
-                length = max(cnt, length);
-                break;
-            }
+            sum -= nums[left];
+            left++;
+        }
+        if (sum == k)
+        {
+            maxLen = max(maxLen, right - left + 1);
+        }
+        right++;
+        if (right < n)
+        {
+            sum += nums[right];
         }
     }
-    return length;
+    return maxLen;
 }
 
 int main()
@@ -52,7 +55,7 @@ int main()
     cin.tie(NULL);
 
     vector<int> v = {10, 5, 2, 7, 1, 9};
-    cout << longestSubarray(v, 15);
+    cout << longestSubarray2(v, 15);
 
     return 0;
 }
